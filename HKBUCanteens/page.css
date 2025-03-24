@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HK School Canteen</title>
+    <style>
+        /* 原有样式 */
+        body {
+            font-family: 'Montserrat', Medium;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, 
+                rgba(255, 96, 0, 0.9),
+                rgba(249, 249, 249, 0.9)
+            ), 
+            linear-gradient(to bottom,
+                rgba(0, 0, 0, 0.1),
+                rgba(0, 0, 0, 0.2)
+            );
+            color: #333;
+        }
+        /* Header */
+        header {
+            border-bottom: 1px solid #ddd;
+            margin: 0; 
+            width: 100%;
+        }
+        /* 顶部导航 */
+        .top-nav {
+            background: #FF6F30; /* 橙色 */
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+        }
+        .top-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            transition: background-color 0.3s;
+        }
+        .top-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.3); /* 悬停时变色 */
+        }
+        /* 第二层导航 */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            background: #fff;
+        }
+        .bottom-nav .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #FF6F30; /* 橙色 */
+            text-decoration: none;
+        }
+        .bottom-nav nav a {
+            margin-left: 15px;
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s;
+        }
+        .bottom-nav nav a:hover {
+            color: #FF6F30; /* 悬停时变色 */
+        }
+        /* 其他样式继续... */
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Harmony Cafeteria</h1>
+    <p style="font-size: 2em;">Hong Kong Baptist University</p>
+    <img src="food category.png" alt="food category" class="floating-image">
+</header>
+
+<!-- 其他内容结构 -->
+
+<footer>
+    <p>&copy; 2024 HK University Food Filter</p>
+</footer>
+
+</body>
+</html>

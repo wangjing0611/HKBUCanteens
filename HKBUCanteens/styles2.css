@@ -1,0 +1,52 @@
+/* Header */
+header {
+    border-bottom: 1px solid #ddd;
+    margin: 0; 
+    width:100%;
+}
+
+/* 顶部导航 */
+.top-nav {
+    background: #FF6F30; /* 橙色 */
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+}
+
+.top-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+}
+
+.top-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.3); /* 悬停时变色 */
+}
+
+/* 第二层导航 */
+.bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    background: #fff;
+}
+
+.bottom-nav .logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #FF6F30; /* 橙色 */
+    text-decoration: none;
+}
+
+.bottom-nav nav a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.bottom-nav nav a:hover {
+    color: #FF6F30; /* 悬停时变色 */
+}

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HK School Canteen</title>
+    <style>
+        /* Navigation Header */
+        .nav-header {
+            border-bottom: 1px solid #ddd;
+            margin: 0; 
+            width: 100%;
+        }
+
+        /* 顶部导航 */
+        .top-nav {
+            background: #FF6F30; /* 橙色 */
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+        }
+
+        .top-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            transition: background-color 0.3s;
+        }
+
+        .top-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.3); /* 悬停时变色 */
+        }
+
+        /* 第二层导航 */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            background: #fff;
+        }
+
+        .bottom-nav .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #FF6F30; /* 橙色 */
+            text-decoration: none;
+        }
+
+        .bottom-nav nav a {
+            margin-left: 15px;
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        .bottom-nav nav a:hover {
+            color: #FF6F30; /* 悬停时变色 */
+        }
+
+        /* 原有的样式保持不变，但将 header 改为 main-header */
+        .main-header {
+            background: url('harmony cafeteria.png') no-repeat center center/cover;
+            height: 90vh;
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        body {
+            font-family: 'Montserrat', Medium;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, 
+                rgba(255, 96, 0, 0.9),
+                rgba(249, 249, 249, 0.9)
+            ), 
+            linear-gradient(to bottom,
+                rgba(0, 0, 0, 0.1),
+                rgba(0, 0, 0, 0.2)
+            );
+            color: #333;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin: 10px 0;
+            z-index: 2;
+        }
+        h2 {
+            margin-top: 100px;
+            text-align: center;
+        }
+        section {
+            padding: 20px;
+        }
+        .info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .info div {
+            flex: 1;
+            margin: 10px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .info div:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 0;
+        }
+
+        /* 添加新的淡入动画关键帧 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 为所有主要部分添加淡入动画 */
+        .main-header, section, footer {
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        /* 设置不同部分的动画延迟，创造连续淡入效果 */
+        .main-header {
+            animation-delay: 0s;
+        }
+
+        section:nth-of-type(1) {
+            animation-delay: 0.5s;
+        }
+
+        section:nth-of-type(2) {
+            animation-delay: 1s;
+        }
+        footer {
+            animation-delay: 1.5s;
+        }
+
+        /* 确保food-category-img的动画不受影响 */
+        .food category.png {
+            opacity: 1;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .food category.png:hover {
+            animation-play-state: paused;
+            transform: scale(1.1);
+        }
+
+        /* 添加悬浮图片的基本样式 */
+        .floating-image {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 80%;
+            height: auto;
+            z-index: 2;
+        }
+
+        /* 当header被hover时显示图片 */
+        .main-header:hover .floating-image {
+            opacity: 1;
+            transform: translate(-50%, -50%) translateY(0);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* 添加浮动动画 */
+        @keyframes float {
+            0% {
+                transform: translate(-50%, -50%) translateY(0px);
+            }
+            50% {
+                transform: translate(-50%, -50%) translateY(-20px);
+            }
+            100% {
+                transform: translate(-50%, -50%) translateY(0px);
+            }
+        }
+
+        /* 右下角悬浮图片样式 */
+        .corner-hover-image {
+            opacity: 0;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 80px; /* 调整大小 */
+            height: auto;
+            transition: all 0.3s ease;
+            z-index: 3;
+            transform: scale(0.8);
+        }
+
+        .info div:hover .corner-hover-image {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 header -->
+    <div class="nav-header">
+        <!-- Top Layer of Navigation -->
+        <div class="top-nav">
+            <div class="left">
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="right">
+                <a href="#" class="lang">EN/CH</a>
+                <a href="about.html">About Us</a>
+            </div>
+        </div>
+        <!-- Second Layer of Navigation -->
+        <div class="bottom-nav">
+            <a href="http://localhost:7450/" class="logo">
+                <img src="title.png" alt="HK University Food Logo">
+            </a>
+            <nav>
+                <a href="http://localhost:7450/canteens">Canteens</a>
+                <a href="http://localhost:7450/restaurants">Restaurants</a>
+                <a href="http://localhost:7450/health">Health</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- 原有的主要 header -->
+    <div class="main-header">
+        <h1>Harmony Cafeteria</h1>
+        <p style="font-size: 2em; z-index: 2;">Hong Kong Baptist University</p>
+        <img src="food category.png" alt="food category" class="floating-image">
+    </div>
+    <section>
+        <div class="info">
+            <div>
+                <h3>Estimation</h3>
+                <img src="分组 1.png" alt="分组 1" style="width: 100%; height: auto; object-fit: cover;">
+            </div>
+            <div>
+                <h3>Opening Hours</h3>
+                <p>Mon - Fri: 7:30 - 18:30</p>
+                <p>Sun & Public Holidays: Closed</p>
+                <h3>Phone</h3>
+                <p>+852 2338 0422</p>
+                <h3>Location</h3>
+                <a href="https://www.google.com/maps/place/Sir+Run+Run+Shaw+Building,+224+Waterloo+Rd,+Beacon+Hill/@22.3402603,114.1796977,17z/data=!3m1!4b1!4m6!3m5!1s0x3404072ffd05ec51:0x7dac6d85c9adfa75!8m2!3d22.3402603!4d114.1796977!16s%2Fg%2F12vrf9741?entry=ttu&g_ep=EgoyMDI0MTEyNC4xIKXMDSoASAFQAw%3D%3D" style="color: #007BFF;">1/F, Run Shaw Building, HK Baptist University</a>
+            </div>
+            <div>
+                <h3>Online Menu</h3>
+                <a href="https://eo.hkbu.edu.hk/content/ito/en/_jcr_content.ssocheck.json?pathPdf=/content/dam/eo-assets/our-services/landing/catering-services/apc/menu/2024%2008%20Catering%20Menu_Harmony%20Cafeteria%20(APC).pdf" style="color: #007BFF;">Online Menu</a>
+                <h3>Payment</h3>
+                <p>Cash</p>
+                <p>Octopus</p>
+                <p>Alipay</p>
+                <p>WeChat Pay</p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>View Other Restaurants</h2>
+        <div class="info">
+            <div style="position: relative;">
+                <a href="https://www.openrice.com/en/hongkong/r-ac2-canteen-kowloon-tong-hong-kong-style-r444067">
+                    <img src="ac2canteen.jpg" alt="AC2 Canteen" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+                </a>
+                <img src="CityU.png" alt="CityU Logo" class="corner-hover-image">
+                <h3>AC2 Canteen</h3>
+                <h3>Location</h3>
+                <a href="https://www.cityu.edu.hk/about/campus/map#code:LI-AC2CANTEEN" style="color: #007BFF;">
+                    3/F, Li Dak Sum Yip Yio Chin Academic Building, City University of Hong Kong
+                </a>
+                <h3>Opening Hours</h3>
+                <p>07:30 - 21:00 (Mon - Sun)</p>
+                <p>Public Holidays: Closed</p>
+                <h3>Phone</h3>
+                <p>+852 2338-0883</p>
+            </div>
+            <div>
+                <a href="https://www.cedars.hku.hk/campuslife/catering/CYMACR">
+                    <img src="hku.png" alt="CYM Canteen" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+                </a>
+                <h3>CYM Canteen</h3>
+                <h3>Location</h3>
+                <a href="http://www.maps.hku.hk/" style="color: #007BFF;">
+                    3/F, Li Dak Sum Yip Yio Chin Academic Building, City University of Hong Kong
+                </a>
+                <h3>Opening Hours</h3>
+                <p>Monday - Friday	7:30 - 21:30</p>
+                <p>Saturday	7:30 - 21:30</p>
+                <p>Sunday & Public Holiday 	7:30 - 21:30</p>
+                <h3>Phone</h3>
+                <p>+852 2857 5511</p>
+                <img src="hku LOGO.png" alt="hku Logo" class="corner-hover-image">
+            </div>
+            <div>
+                <a href="https://www.openrice.com/en/hongkong/r-student-canteen-hung-hom-hong-kong-style-chinese-bbq-r120441">
+                    <img src="polyU.jpg" alt="CYM Canteen" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+                </a>
+                <h3>PolyU Student Canteen</h3>
+                <h3>Location</h3>
+                <a href="https://g.co/kgs/WkmJqdA" style="color: #007BFF;">
+                    The Hong Kong Polytechnic University (PolyU)
+                </a>
+                <h3>Opening Hours</h3>
+                <p>Monday - Friday	7:30 - 21:30</p>
+                <p>Saturday	7:30 - 21:30</p>
+                <p>Sunday & Public Holiday 	7:30 - 21:30</p>
+                <h3>Phone</h3>
+                <p>+852 2766 6978</p>
+                <img src="PolyU.png" alt="PolyU" class="corner-hover-image">
+            </div>
+        </div>
+    </section>
+    <section>
+    <div class="info">
+        <div style="position: relative;">
+            <a href="https://www.openrice.com/en/hongkong/r-ac2-canteen-kowloon-tong-hong-kong-style-r444067">
+                <img src="HKUST.png" alt="HKUST" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+            </a>
+            <h3>Passion</h3>
+            <h3>Location</h3>
+            <a href="https://www.google.com/maps/dir//22.3363998,114.2654655/@22.3363998,114.2654655,18z?entry=ttu&g_ep=EgoyMDI0MTEyNC4xIKXMDSoASAFQAw%3D%3D" style="color: #007BFF;">
+                Chia-Wei Woo Academic Concourse, 1/F Academic Building, Hong Kong University of Science and Technology, Clear Water Bay, Sai Kung
+            </a>
+            <h3>Opening Hours</h3>
+            <p>Monday - Friday: 8:00 - 16:30</p>
+            <p>Saturday - Sunday: Closed</p>
+            <h3>Phone</h3>
+            <p>+852 2811 1243</p>
+            <img src="UST logo.png" alt="UST logo" class="corner-hover-image">
+        </div>
+        <div>
+            <a href="https://www.openrice.com/zh/hongkong/r-%E8%8C%83%E5%85%8B%E5%BB%89%E6%A8%93%E5%AD%B8%E7%94%9F%E8%86%B3%E5%A0%82-%E6%B2%99%E7%94%B0-%E6%B8%AF%E5%BC%8F-r23505">
+                <img src="cuhk.png" alt="Van Cleef Building Student Cafeteria" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+            </a>
+            <h3>Van Cleef Building Student Cafeteria</h3>
+            <h3>Location</h3>
+            <a href="https://www.google.com/maps/place/22%C2%B025'06.0%22N+114%C2%B012'18.8%22E/@22.418345,114.205231,18z/data=!4m4!3m3!8m2!3d22.4183449!4d114.2052305?hl=zh-HK&entry=ttu&g_ep=EgoyMDI0MTEyNC4xIKXMDSoASAFQAw%3D%3D" style="color: #007BFF;">
+                G/F, Benjamin Franklin Centre, Central Campus, The Chinese University of Hong Kong, Sha Tin
+            </a>
+            <h3>Opening Hours</h3>
+            <p>7:30 a.m. to 8:00 p.m. (Monday to Friday)</p>
+            <p>8:30am to 7:30pm (Sunday)</p>
+            <p>Closed on Saturdays and Public Holidays</p>
+            <h3>Phone</h3>
+            <p>+852 9363 0245</p>
+            <img src="cuhk logo.png" alt="cuhk logo" class="corner-hover-image">
+        </div>
+        <div>
+            <a href="https://eo.hkbu.edu.hk/eo-services/services-facilities/Catering-Services/Main-Canteen.html">
+                <img src="main canteen.jpg" alt="Main Canteen" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+            </a>
+            <h3>Main Canteen</h3>
+            <h3>Location</h3>
+            <a href="https://g.co/kgs/WkmJqdA" style="color: #007BFF;">
+                The Hong Kong Polytechnic University (PolyU)
+            </a>
+            <h3>Opening Hours</h3>
+            <p>Mon – Fri: 7:30 - 20:00</p>
+            <p>Sat: 8:30 - 17:00</p>
+            <p>Sun & Public Holidays: Closed</p>
+            <h3>Phone</h3>
+            <p>+852 2972 2878</p>
+            <h3>Online Menu</h3>
+                <a href="https://eo.hkbu.edu.hk/content/ito/en/_jcr_content.ssocheck.json?pathPdf=/content/dam/eo-assets/our-services/landing/catering-services/maxim%27s/2024%2005%20Catering%20Menu_Main%20Canteen%20(Maxims).pdf;">Online Menu</a>
+                <img src="hkub LOGO.png" alt="hkub LOGO" class="corner-hover-image">
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2024 HK University Food Filter</p>
+    </footer>
+
+</body>
+</html>
